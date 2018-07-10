@@ -9,8 +9,8 @@ namespace XmlCommentsParser
         [XmlElement(ElementName = "assembly")] 
         public AssemblyElement Assembly { get; set; }
         
-        [XmlArrayItem(ElementName= "member", IsNullable=true, Type = typeof(MemberElement))]
+        [XmlArrayItem(ElementName= "member", IsNullable=true, Type = typeof(MemberXmlElement))]
         [XmlArrayAttribute("members")]
-        public List<MemberElement> Members { get; set; } = new List<MemberElement>();
+        public List<MemberXmlElement> Members { get; set; } = new List<MemberXmlElement>();
     }
 }
