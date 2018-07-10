@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace XmlCommentsParser
 {
-    public class XmlCodeCommentSummary : XmlCodeCommentFormattableElement
+    public class SummaryElement : FormattableElement
     {
 
     }

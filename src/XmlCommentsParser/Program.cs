@@ -3,22 +3,22 @@ using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
-using TestXml.XmlCodeComments;
+using XmlCommentsParser;
 
-namespace TestXml
+namespace XmlCommentsParser
 {
-    class Program
+    public static class XmlComments
     {
         static void Main(string[] args)
         {
             //string path = @"c:\temp\serialized_xml_file.xml";
             string path = @"c:\temp\Health.xml";
 
-            var serializer = new XmlSerializer(typeof(XmlCodeCommentDoc));
+            var serializer = new XmlSerializer(typeof(DocElement));
             serializer.UnknownElement += Serializer_UnknownElement;
 
             StreamReader reader = new StreamReader(path);
-            var docs = (XmlCodeCommentDoc)serializer.Deserialize(reader);
+            var docs = (DocElement)serializer.Deserialize(reader);
             var output = new StringWriter();
             reader.Close();
 
@@ -39,16 +39,22 @@ namespace TestXml
             File.WriteAllText(@"c:\temp\output_file.txt", output.ToString());
         }
 
+        // Method that handles unknown element exceptions by manually setting the value of the error element.
         private static void Serializer_UnknownElement(object sender, XmlElementEventArgs e)
         {
-            if (sender is XmlCodeCommentFormattableElement) 
+            if (sender is FormattableElement) 
             {
-                var element = (XmlCodeCommentSummary)e.ObjectBeingDeserialized;
+                var element = (SummaryElement)e.ObjectBeingDeserialized;
                 element.Value = e.Element.InnerXml;
             }
-            else if (sender is XmlCodeCommentParameter)
+            else if (sender is ParameterElement)
             {
-                var element = (XmlCodeCommentParameter)e.ObjectBeingDeserialized;
+                var element = (ParameterElement)e.ObjectBeingDeserialized;
+                element.Value = e.Element.InnerXml;
+            }
+            else if (sender is ExceptionElement)
+            {
+                var element = (ExceptionElement)e.ObjectBeingDeserialized;
                 element.Value = e.Element.InnerXml;
             }
         }

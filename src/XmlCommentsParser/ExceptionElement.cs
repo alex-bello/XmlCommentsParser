@@ -1,8 +1,8 @@
 using System.Xml.Serialization;
 
-namespace TestXml.XmlCodeComments
+namespace XmlCommentsParser
 {
-    public class XmlCodeCommentException
+    public class ExceptionElement
     {
         [XmlAttribute(AttributeName = "member")]
         public string Member { get; set; }

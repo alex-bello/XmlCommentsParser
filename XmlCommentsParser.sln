@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{320EB956-F077-4A3F-90C2-F19DE80610A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestXml", "src\TestXml\TestXml.csproj", "{F6736D7D-16D9-40B2-9BF9-F0D274465C00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlCommentsParser", "src\XmlCommentsParser\XmlCommentsParser.csproj", "{F6736D7D-16D9-40B2-9BF9-F0D274465C00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

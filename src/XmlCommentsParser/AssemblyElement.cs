@@ -1,8 +1,8 @@
 using System.Xml.Serialization;
 
-namespace TestXml.XmlCodeComments
+namespace XmlCommentsParser
 {
-    public class XmlCodeCommentAssembly
+    public class AssemblyElement
     {
         [XmlElement(ElementName = "name")] 
         public string Name { get; set; }

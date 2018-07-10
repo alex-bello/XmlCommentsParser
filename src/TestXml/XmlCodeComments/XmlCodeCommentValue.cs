@@ -1,4 +1,4 @@
-namespace TestXml.XmlCodeComments
+namespace XmlCommentsParser
 {
     public class XmlCodeCommentValue : XmlCodeCommentFormattableElement
     {

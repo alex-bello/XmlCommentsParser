@@ -2,7 +2,7 @@ using System.Xml.Serialization;
 
 namespace XmlCommentsParser
 {
-    public class XmlCodeCommentParameter
+    public class ParameterElement
     {
         [XmlAttribute(AttributeName = "name")]
         public string Name { get; set; }

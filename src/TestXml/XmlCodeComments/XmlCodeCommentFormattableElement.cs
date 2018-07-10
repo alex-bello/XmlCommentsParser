@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 
-namespace TestXml.XmlCodeComments
+namespace XmlCommentsParser
 {
     public abstract class XmlCodeCommentFormattableElement
     {
