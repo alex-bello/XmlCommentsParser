@@ -9,15 +9,12 @@ namespace XmlCommentsParser
 {
     public static class XmlComments
     {
-        static void Main(string[] args)
+        public static DocElement Parse(string file)
         {
-            //string path = @"c:\temp\serialized_xml_file.xml";
-            string path = @"c:\temp\Health.xml";
-
             var serializer = new XmlSerializer(typeof(DocElement));
             serializer.UnknownElement += Serializer_UnknownElement;
 
-            StreamReader reader = new StreamReader(path);
+            StreamReader reader = new StreamReader(file);
             var docs = (DocElement)serializer.Deserialize(reader);
             var output = new StringWriter();
             reader.Close();
@@ -37,6 +34,7 @@ namespace XmlCommentsParser
             });
 
             File.WriteAllText(@"c:\temp\output_file.txt", output.ToString());
+            return docs;
         }
 
         // Method that handles unknown element exceptions by manually setting the value of the error element.
