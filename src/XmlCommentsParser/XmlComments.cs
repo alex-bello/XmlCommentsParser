@@ -14,45 +14,31 @@ namespace XmlCommentsParser
         public static DocElement Parse(string file)
         {
             var serializer = new XmlSerializer(typeof(DocElement));
-            //serializer.UnknownElement += Serializer_UnknownElement;
-
             StreamReader reader = new StreamReader(file);
             var docs = (DocElement)serializer.Deserialize(reader);
-            var output = new StringWriter();
             reader.Close();
-
-            output.WriteLine(docs.Assembly.Name);
-            output.WriteLine(docs.Members.Count());
-
-            docs.Members.ForEach(x => {
-
-
-                output.WriteLine($"{x.Name}");
-                output.WriteLine($"  Example: {x.Example?.InnerXml ?? "null"}");
-                x.Exceptions?.ToList().ForEach(p => output.WriteLine($"  Exception {p.Member}: {p.Value}"));
-                output.WriteLine($"  Summary: {x.Summary?.InnerXml ?? "null"}");
-                x.Parameters?.ToList().ForEach(p => output.WriteLine($"  Parameter {p.Name}: {p.Value}"));
-                output.WriteLine($"  Remarks: {x.Remarks?.InnerXml ?? "null"}");
-                output.WriteLine($"  Returns: {x.Returns?.InnerXml ?? "null"}");
-                x.TypeParameters?.ToList().ForEach(p => output.WriteLine($"  TypeParameter {p.Name}: {p.Value}"));
-                output.WriteLine($"  Value: {x.Value?.InnerXml ?? "null"}");
-            });
-
-            File.WriteAllText(@"c:\temp\output_file.txt", output.ToString());
             return docs;
         }
 
         public static IEnumerable<IComment> GetComments(string file)
         {
             var output = new List<IComment>();
-            var serializer = new XmlSerializer(typeof(DocElement));
-            StreamReader reader = new StreamReader(file);
-            var docs = (DocElement)serializer.Deserialize(reader);
-            reader.Close();
+            var docs = XmlComments.Parse(file);
 
             docs.Members.ForEach(x => {
                 var name = x.Name.Split(':');
-                output.Add( new Comment { Name = name[1], SourceObjectType = GetSourceObjectType(name[0]) });
+                output.Add( new Comment { 
+                    Name = name[1], 
+                    SourceObjectType = GetSourceObjectType(name[0]),
+                    Example = x.Example?.InnerXml,
+                    Exceptions = x.Exceptions?.Select(y => new ExceptionComment { ExceptionType = y.GetAttribute("cref"), Value = y.InnerXml }).ToArray(),
+                    Parameters = x.Parameters?.Select(y => new ParameterComment { Name = y.GetAttribute("name"), Value = y.InnerXml }).ToArray(),
+                    Summary = x.Summary?.InnerXml,
+                    Remarks = x.Remarks?.InnerXml,
+                    Returns = x.Returns?.InnerXml,
+                    TypeParameters = x.TypeParameters?.Select(y => new ParameterComment { Name = y.GetAttribute("name"), Value = y.InnerXml }).ToArray(),
+                    Value = x.Value?.InnerXml
+                    });
             });
 
             return output;
@@ -62,6 +48,10 @@ namespace XmlCommentsParser
         {
             switch (typeAbbreviation)
             {
+                case "M":
+                    return SourceObjectType.Method;
+                case "P":
+                    return SourceObjectType.Property;
                 case "T":
                     return SourceObjectType.Type;
                 default:

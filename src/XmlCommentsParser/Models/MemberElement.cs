@@ -12,8 +12,8 @@ namespace XmlCommentsParser
         [XmlAnyElement("example")]
         public XmlElement Example { get; set; }
 
-        [XmlElement(ElementName= "exception", IsNullable=true, Type = typeof(ExceptionElement))]
-        public ExceptionElement[] Exceptions { get; set; }
+        [XmlAnyElement("exception")]
+        public XmlElement[] Exceptions { get; set; }
 
         [XmlAnyElement("summary")]
         public XmlElement Summary { get; set; }
@@ -24,11 +24,11 @@ namespace XmlCommentsParser
         [XmlAnyElement("returns")]
         public XmlElement Returns { get; set; }
 
-        [XmlElement(ElementName= "param", IsNullable=true, Type = typeof(ParameterElement))]
-        public ParameterElement[] Parameters { get; set; }
+        [XmlAnyElement("param")]
+        public XmlElement[] Parameters { get; set; }
 
-        [XmlElement(ElementName= "typeparam", IsNullable=true, Type = typeof(ParameterElement))]
-        public ParameterElement[] TypeParameters { get; set; }
+        [XmlAnyElement("typeparam")]
+        public XmlElement[] TypeParameters { get; set; }
 
         [XmlAnyElement("value")]
         public XmlElement Value { get; set; }
