@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>Alex Bello</Authors>
+    <Description>Small library for parsing .NET XML Comments into POCO objects.</Description>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/alex-bello/XmlCommentsParser/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/alex-bello/XmlCommentsParser/</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/alex-bello/XmlCommentsParser/blob/master/LICENSE.md</PackageLicenseUrl>
+    <Copyright>2018</Copyright>
+    <PackageTags>.NET XML Comments Parser</PackageTags>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
