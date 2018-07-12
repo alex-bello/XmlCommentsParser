@@ -5,7 +5,6 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Serialization;
 using XmlCommentsParser;
-using XmlCommentsParser.Models;
 
 namespace XmlCommentsParser
 {
