@@ -1,4 +1,4 @@
-namespace XmlCommentsParser.Models
+namespace XmlCommentsParser
 {
     public class ExceptionComment
     {
